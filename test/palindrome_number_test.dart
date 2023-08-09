@@ -1,4 +1,4 @@
-import 'package:leet_code_challenges/palindrome_number.dart';
+import 'package:leet_code_challenges/palindrome_number/palindrome_number.dart';
 import 'package:test/test.dart';
 
 void main() {
