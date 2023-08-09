@@ -1,3 +1,5 @@
+//https://leetcode.com/problems/pascals-triangle/
+
 typedef PascalTriangle = List<List<int>>;
 
 class Solution {
