@@ -1,5 +1,6 @@
 class Solution {
   static const Map<String, int> _romanChars = {
+    "0": 0,
     "I": 1,
     'V': 5,
     'X': 10,
@@ -9,30 +10,24 @@ class Solution {
     'M': 1000,
   };
 
-  int romanToInt(String s) {
+  int romanToInt(String romanNumber) {
     int sum = 0;
 
-    int charIndex = 0;
-    while (charIndex < s.length) {
-      final String char = s[charIndex];
+    final String romanNumberWithZero = "${romanNumber}0";
+    for (var charIndex = 0; charIndex < romanNumber.length; charIndex++) {
+      final String char = romanNumberWithZero[charIndex];
+      final String nextChar = romanNumberWithZero[charIndex + 1];
+
       final int value = _romanChars[char]!;
-      final int nextValue = _getNextValue(s, charIndex);
+      final int nextValue = _romanChars[nextChar]!;
 
       if (value < nextValue) {
         sum -= value;
       } else {
         sum += value;
       }
-
-      charIndex++;
     }
-    return sum;
-  }
 
-  int _getNextValue(String romanNumber, int charIndex) {
-    final int nextCharIndex = charIndex + 1;
-    if (nextCharIndex == romanNumber.length) return 0;
-    final nextRomanChar = romanNumber[nextCharIndex];
-    return _romanChars[nextRomanChar] ?? 0;
+    return sum;
   }
 }
