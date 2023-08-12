@@ -1,4 +1,4 @@
-import 'package:leet_code_challenges/valid_parentheses.dart';
+import 'package:leet_code_challenges/valid_parentheses/valid_parentheses.dart';
 import 'package:test/test.dart';
 
 void main() {
