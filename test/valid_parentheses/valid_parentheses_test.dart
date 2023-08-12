@@ -10,6 +10,14 @@ void main() {
     });
 
     test(
+      "when s is '(', "
+      "then expect to return false",
+      () {
+        expect(solution.isValid("("), isFalse);
+      },
+    );
+
+    test(
       "when s is '()', "
       "then expect to return true",
       () {
@@ -43,6 +51,14 @@ void main() {
 
     test(
       "when s is '([)]', "
+      "then expect to return false",
+      () {
+        expect(solution.isValid("([)]"), isFalse);
+      },
+    );
+
+    test(
+      "when s is '([]{})]', "
       "then expect to return false",
       () {
         expect(solution.isValid("([)]"), isFalse);
