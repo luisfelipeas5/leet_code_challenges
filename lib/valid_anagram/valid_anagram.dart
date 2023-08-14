@@ -1,88 +1,34 @@
+//https://leetcode.com/problems/valid-anagram/submissions/1021485781/?envType=list&envId=ridaipn3
+
 class Solution {
+  static final int _alphabetCharCount = "z".codeUnitAt(0) - "a".codeUnitAt(0);
+
   bool isAnagram(String s, String t) {
-    s = _mergeSort(
-      s,
-      substringLeftIndex: 0,
-      substringRightIndex: s.length ~/ 2,
-      substringLength: s.length,
-    );
-    t = _mergeSort(
-      t,
-      substringLeftIndex: 0,
-      substringRightIndex: t.length ~/ 2,
-      substringLength: t.length,
-    );
-    return s == t;
-  }
+    if (s.length != t.length) return false;
 
-  String _mergeSort(
-    String fullText, {
-    required int substringLeftIndex,
-    required int substringRightIndex,
-    required int substringLength,
-  }) {
-    if (substringLength <= 1) {
-      return fullText;
+    final List<int> sCharsCount = _countChars(s);
+    final List<int> tCharsCount = _countChars(t);
+
+    for (var i = 0; i < sCharsCount.length; i++) {
+      final sCharCount = sCharsCount[i];
+      final tCharCount = tCharsCount[i];
+      if (sCharCount != tCharCount) return false;
     }
-
-    fullText = _mergeSort(
-      fullText,
-      substringLeftIndex: substringLeftIndex,
-      substringRightIndex: (substringRightIndex - substringLeftIndex) ~/ 2,
-      substringLength: substringRightIndex - substringLeftIndex,
-    );
-    fullText = _mergeSort(
-      fullText,
-      substringLeftIndex: substringRightIndex,
-      substringRightIndex: substringRightIndex + (substringLength ~/ 2),
-      substringLength: ,
-    );
-
-    return _twoFingerSort(
-      fullText,
-      substringLeftIndex: substringLeftIndex,
-      substringRightIndex: substringRightIndex,
-      substringLength: substringLength,
-    );
+    return true;
   }
 
-  String _twoFingerSort(
-    String fullText, {
-    required int substringLeftIndex,
-    required int substringRightIndex,
-    required int substringLength,
-  }) {
-    final int substringLastIndex = substringLeftIndex + substringLength - 1;
-    print(
-        "substring = ${fullText.substring(substringLeftIndex, substringLastIndex + 1)}");
-
-    String sortedString = "";
-
-    int leftIndex = substringLeftIndex;
-    int rightIndex = substringRightIndex;
-
-    while (
-        leftIndex < substringRightIndex || rightIndex <= substringLastIndex) {
-      final String leftChar = fullText[leftIndex];
-      final String rightChar = fullText[rightIndex];
-
-      if (rightIndex > substringLastIndex ||
-          (leftIndex < substringRightIndex &&
-              leftChar.codeUnitAt(0) < rightChar.codeUnitAt(0))) {
-        sortedString += leftChar;
-        leftIndex++;
-      } else {
-        sortedString += rightChar;
-        rightIndex++;
-      }
+  List<int> _countChars(String text) {
+    final charCountList = _makeEmptyCharCountList();
+    for (var charIndex = 0; charIndex < text.length; charIndex++) {
+      final char = text[charIndex];
+      final indexOnList = char.codeUnitAt(0) - "a".codeUnitAt(0);
+      charCountList[indexOnList] += 1;
     }
-
-    print("sortedString = $sortedString");
-
-    return fullText.replaceRange(
-      substringLeftIndex,
-      substringLeftIndex + substringLength,
-      sortedString,
-    );
+    return charCountList;
   }
+
+  List<int> _makeEmptyCharCountList() {
+    return List.filled(_alphabetCharCount + 1, 0, growable: false);
+  }
+
 }
