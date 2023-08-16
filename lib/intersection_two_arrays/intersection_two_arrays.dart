@@ -2,27 +2,22 @@
 
 class Solution {
   late List<int> numsIntersection;
-  late Set<int> intersectionSet;
+  late Map<int, bool> numSet;
 
   List<int> intersection(List<int> nums1, List<int> nums2) {
     numsIntersection = [];
-    intersectionSet = {};
+    numSet = {};
 
-    for (var num1 in nums1) {
-      if (intersectionSet.contains(num1)) continue;
-      for (var num2 in nums2) {
-        if (num1 == num2) {
-          _insert(num1);
-          break;
-        }
+    for (var num in nums1) {
+      numSet[num] = false;
+    }
+    for (var num in nums2) {
+      if (numSet[num] == false) {
+        numsIntersection.add(num);
+        numSet[num] = true;
       }
     }
 
     return numsIntersection;
-  }
-
-  void _insert(int num) {
-    numsIntersection.add(num);
-    intersectionSet.add(num);
   }
 }

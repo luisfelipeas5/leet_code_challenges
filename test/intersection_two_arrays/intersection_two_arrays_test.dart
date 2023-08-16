@@ -25,7 +25,7 @@ void main() {
       () {
         final List<int> nums1 = [4, 9, 5];
         final List<int> nums2 = [9, 4, 9, 8, 4];
-        expect(solution.intersection(nums1, nums2), [4, 9]);
+        expect(solution.intersection(nums1, nums2), [9, 4]);
       },
     );
   });
