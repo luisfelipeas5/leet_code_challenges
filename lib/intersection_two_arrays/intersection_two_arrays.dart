@@ -1,20 +1,34 @@
 //https://leetcode.com/problems/intersection-of-two-arrays/description/?envType=list&envId=ridaipn3
 
 class Solution {
-  late List<int> numsIntersection;
-  late Map<int, bool> numSet;
-
   List<int> intersection(List<int> nums1, List<int> nums2) {
-    numsIntersection = [];
-    numSet = {};
-
-    for (var num1 in nums1) {
-      numSet[num1] = false;
+    if (nums1.length > nums2.length) {
+      return _intersection(
+        biggest: nums1,
+        smallest: nums2,
+      );
     }
-    for (var num2 in nums2) {
-      if (numSet[num2] == false) {
-        numsIntersection.add(num2);
-        numSet[num2] = true;
+
+    return _intersection(
+      biggest: nums2,
+      smallest: nums1,
+    );
+  }
+
+  List<int> _intersection({
+    required List<int> smallest,
+    required List<int> biggest,
+  }) {
+    final List<int> numsIntersection = [];
+    final Map<int, bool> numSet = {};
+
+    for (var num in smallest) {
+      numSet[num] = false;
+    }
+    for (var num in biggest) {
+      if (numSet[num] == false) {
+        numsIntersection.add(num);
+        numSet[num] = true;
       }
     }
 
