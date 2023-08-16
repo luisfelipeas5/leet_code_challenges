@@ -8,13 +8,13 @@ class Solution {
     numsIntersection = [];
     numSet = {};
 
-    for (var num in nums1) {
-      numSet[num] = false;
+    for (var num1 in nums1) {
+      numSet[num1] = false;
     }
-    for (var num in nums2) {
-      if (numSet[num] == false) {
-        numsIntersection.add(num);
-        numSet[num] = true;
+    for (var num2 in nums2) {
+      if (numSet[num2] == false) {
+        numsIntersection.add(num2);
+        numSet[num2] = true;
       }
     }
 
