@@ -34,5 +34,14 @@ void main() {
         expect(solution.findDisappearedNumbers(nums), [4]);
       },
     );
+
+    test(
+      "when nums = [4,3,2,7,7,2,3,1], "
+      "then expect to return [5, 6, 8]",
+      () {
+        final nums = [4, 3, 2, 7, 7, 2, 3, 1];
+        expect(solution.findDisappearedNumbers(nums), [5, 6, 8]);
+      },
+    );
   });
 }

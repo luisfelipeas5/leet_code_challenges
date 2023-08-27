@@ -1,21 +1,18 @@
 class Solution {
   List<int> findDisappearedNumbers(List<int> nums) {
-    final result = List<int>.generate(nums.length, (index) => index + 1);
+    final factor = 2 * nums.length;
 
-    const markToDelete = -1;
     for (var i = 0; i < nums.length; i++) {
-      result[nums[i] - 1] = markToDelete;
+      final num = nums[i];
+      nums[(num % factor) - 1] += factor;
     }
 
-    int index = 0;
-    while (index < result.length) {
-      if (result[index] == markToDelete) {
-        result.removeAt(index);
-      } else {
-        index++;
+    final result = List<int>.empty(growable: true);
+    for (var i = 0; i < nums.length; i++) {
+      if (nums[i] <= factor) {
+        result.add(i + 1);
       }
     }
-
     return result;
   }
 }
